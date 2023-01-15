@@ -1,13 +1,30 @@
 <body>
   <div id="root"></div>
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+  <!--This is a "minimized" version of React to create components-->
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+  <!--This is a "minimized" version of React to render components-->
   <script type="text/javascript">
-    const rootElement = document.getElementById('root')
+    const rootElement = document.getElementById("root");
+
+    // The createElement() is a little different from the default one
     const element = React.createElement('div', {
-      className: 'container',
-      children: 'Hello World',
-    })
+      //children: 'Hello World', // !This is ignored if we put a second property
+      //! We can use another React element as a children
+      children: React.createElement('span', null, 'Hello', ' World'),
+      className: 'container'
+    },
+      // 'Hello World',
+      // 'Goodbye World'
+       );
+
+    // const element = document.createElement("div");
+    // element.textContent="Hello world!";
+    // element.className='Container';
+
     ReactDOM.render(element, rootElement)
+    // rootElement.appendChild(element);
+
+    console.log(element);
   </script>
 </body>
