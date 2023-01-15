@@ -2,10 +2,14 @@
   <div id="root"></div>
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
-  <script type="text/babel">
-    const rootElement = document.getElementById('root')
-    const element = <div className="container">Hello World</div>
-    ReactDOM.render(element, rootElement)
+  <!-- Babel is a compiler to translate JSX into React components -->
+  <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script> 
+  <script type="text/babel"> // Now the browser know that there is need of Babel to compile the content
+    const rootElement = document.getElementById('root');
+
+    // It's easier to create elements in JSX
+    const element = <div className="container"> Hello World</div>
+    
+    ReactDOM.render(element, rootElement);
   </script>
 </body>
