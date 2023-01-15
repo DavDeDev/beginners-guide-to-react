@@ -1,14 +1,48 @@
 <body>
-  <div id="root"></div>
+  <div id="root">
+
+  </div>
+
   <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
-    const element = (
-      <>
-        <span>Hello</span> <span>World</span>
-      </>
+
+
+    const helloElement = React.createElement('span', null, 'Hello');
+    const worldElement = React.createElement('span', null, ' World!');
+    //! How to put two elements side-by-side in React??
+    // It's impossible natively so the React team built .Fragment
+
+    const element = React.createElement(
+      React.Fragment,
+      null,
+      helloElement,
+      // We can even add as many elements as we want
+      worldElement,
     )
-    ReactDOM.render(element, document.getElementById('root'))
+
+    // !But how to do it with JSX
+
+    const elementJSX = (
+      <React.Fragment>
+        <span>Hello</span>
+        <span>World</span>
+      </React.Fragment>
+    );
+
+    //IS THE SAME OF
+    const elementJSX2 = (
+      // Empty angle brackets
+      <> 
+        <span>Hello</span>
+        <span>World</span>
+      </>
+    );
+
+    // ReactDOM.render(element, document.getElementById('root'))
+    ReactDOM.render(elementJSX, document.getElementById('root'))
+
   </script>
 </body>
+
