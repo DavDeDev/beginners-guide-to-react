@@ -4,17 +4,37 @@
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
-    function Message({children}) {
-      return <div className="message">{children}</div>
-    }
+
+    // const message = <div className="message">Hello World</div>
+
+    // We parameterized the message by adding an arrow function
+
+    const Message = props => <div className="message">{props.children}</div>
+
+    // const element = (
+    //   // This is not rendered because we should pass it as a msg property!
+    //   <div className="container">
+    //     <Message> Hello World via tag </Message> 
+    //     {Message({msg:'Goodbye World'})}
+    //     {Message({msg:'Hello World'})}
+    //   </div>
+    // );
 
     const element = (
+      // This is not rendered because we should pass it as a msg property!
       <div className="container">
-        <Message>Hello World</Message>
-        <Message>Goodbye World</Message>
-      </div>
-    )
+        <Message>I can type in between the tag, because it accepts only children now
+          <Message>I am nested!!</Message>
+          <span> I am nested too!</span>
+        </Message>
 
-    ReactDOM.render(element, document.getElementById('root'))
+      </div>
+    );
+
+    console.log(<div>Hello World</div>);
+    console.log(<Message>Hello world via tag</Message>);
+
+    ReactDOM.render(element, document.getElementById('root'));
+
   </script>
 </body>
