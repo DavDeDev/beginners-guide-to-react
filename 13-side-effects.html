@@ -5,10 +5,13 @@
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
     function Greeting() {
+      // I want the name to stored in the local storage and retrieved next time I log in
+      // ===> React's SideEffects can accomplish this by using useEffect hook
+
       const [name, setName] = React.useState(
         window.localStorage.getItem('name') || '',
       )
-
+      // Another hook, this will be called every time the Greeting component is rendered
       React.useEffect(() => {
         window.localStorage.setItem('name', name)
       })
