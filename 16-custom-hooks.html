@@ -4,6 +4,8 @@
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
+
+    // Custom hook
     function useLocalStorageState(key, defaultValue = '') {
       const [state, setState] = React.useState(
         () => window.localStorage.getItem(key) || defaultValue,
@@ -17,7 +19,8 @@
     }
 
     function Greeting() {
-      const [name, setName] = useLocalStorageState('name')
+      //We use the custom hook to build our application
+      const [name, setName] = useLocalStorageState('name', 'ciao')
 
       const handleChange = event => setName(event.target.value)
 

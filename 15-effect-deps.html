@@ -9,9 +9,12 @@
         () => window.localStorage.getItem('name') || '',
       )
 
+      // This is an optimization
       React.useEffect(() => {
+        console.log("greeting useEffect");
         window.localStorage.setItem('name', name)
-      }, [name])
+      }, [name]) // The second argument is a dependency array
+      //! Keep the dep array accurate!!
 
       const handleChange = event => setName(event.target.value)
 
@@ -30,7 +33,7 @@
       const [count, setCount] = React.useState(0)
       return (
         <>
-          <button onClick={() => setCount(c => c + 1)}>{count}</button>
+          <button onClick={() => setCount(c => c+1)}>{count}</button>
           <Greeting />
         </>
       )
