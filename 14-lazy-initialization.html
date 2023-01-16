@@ -6,7 +6,8 @@
   <script type="text/babel">
     function Greeting() {
       const [name, setName] = React.useState(
-        () => window.localStorage.getItem('name') || '',
+        // Synchronously called function
+       /* By creating an arrow function we create a "lazy" initialization*/ () => window.localStorage.getItem('name') || '',
       )
 
       React.useEffect(() => {
