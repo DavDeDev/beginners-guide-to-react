@@ -4,42 +4,50 @@
   <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
   <script type="text/babel">
-    const rootElement = document.getElementById('root')
+      const rootElement = document.getElementById('root')
 
-    const state = {eventCount: 0, username: ''}
+      const state = { eventCount: 0, username: 'hellothere' }
 
-    function App() {
-      function handleClick() {
-        setState({eventCount: state.eventCount + 1})
+      function App() {
+
+          function handleClick() {
+              setState({ eventCount: state.eventCount + 1 })
+          }
+
+          function handleChange(event){
+              //! React does serious optimization on the events which are different from the native event
+              console.log(event); //SyntheticEvent
+              console.log(event.nativeEvent); //the traditional event
+              setState({ username: event.target.value })
+          }
+          
+          return (
+              <div>
+                  <p> There have been {state.eventCount} events.</p>
+                  <p>
+                      <button onClick={handleClick}>Click Me</button>
+                  </p>
+                  <p>You typed: {state.username} </p>
+                  <p>
+                      <input
+                          onChange={handleChange}
+                      />
+                  </p>
+              </div>
+          )
       }
 
-      function handleChange(event) {
-        setState({username: event.target.value})
+      function setState(newState) {
+          Object.assign(state, newState)
+          renderApp()
       }
 
-      return (
-        <div>
-          <p>There have been {state.eventCount} events.</p>
-          <p>
-            <button onClick={handleClick}>Click Me</button>
-          </p>
-          <p>You typed: {state.username}</p>
-          <p>
-            <input onChange={handleChange} />
-          </p>
-        </div>
-      )
-    }
+      function renderApp() {
+          ReactDOM.render(<App />, document.getElementById('root'))
+      }
 
-    function setState(newState) {
-      Object.assign(state, newState)
-      renderApp()
-    }
+      renderApp();
 
-    function renderApp() {
-      ReactDOM.render(<App />, document.getElementById('root'))
-    }
 
-    renderApp()
   </script>
 </body>
