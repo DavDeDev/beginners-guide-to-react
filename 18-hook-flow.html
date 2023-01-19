@@ -6,6 +6,7 @@
   <script type="text/babel">
     // https://github.com/donavon/hook-flow
 
+    // 
     function Child() {
       console.log('%c    Child: render start', 'color: MediumSpringGreen')
 
@@ -61,11 +62,13 @@
     function App() {
       console.log('%cApp: render start', 'color: MediumSpringGreen')
 
+      //This function is called immediately when the component is rendered
       const [showChild, setShowChild] = React.useState(() => {
         console.log('%cApp: useState callback', 'color: tomato')
         return false
       })
 
+      //This function are called asynchronusly
       React.useEffect(() => {
         console.log('%cApp: useEffect no deps', 'color: LightCoral')
         return () => {
@@ -81,14 +84,14 @@
             'color: MediumTurquoise',
           )
         }
-      }, [])
+      }, []) // This callback won't be called on updates because the dependency array is empty
 
       React.useEffect(() => {
         console.log('%cApp: useEffect with dep', 'color: HotPink')
         return () => {
           console.log('%cApp: useEffect with dep cleanup', 'color: HotPink')
         }
-      }, [showChild])
+      }, [showChild]) // This callback will be called on updates because the dependency array contains the state variable
 
       const element = (
         <>
