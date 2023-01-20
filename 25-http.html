@@ -12,25 +12,29 @@
   <script src="/pokemon-api.js"></script>
 
   <script type="text/babel">
-    function PokemonInfo({pokemonName}) {
-      const [pokemon, setPokemon] = React.useState(null)
-
+    function PokemonInfo({ pokemonName }) {
+      const [pokemon, setPokemon] = React.useState(null);
+      //This needs to be a synchronous function, but Fetch Pokemon is asynchronous, then we use a React.useEffect
       React.useEffect(() => {
         if (!pokemonName) {
           return
         }
-        fetchPokemon(pokemonName).then(pokemonData => {
-          setPokemon(pokemonData)
-        })
+        fetchPokemon(pokemonName).then(
+          pokemonData => {
+            setPokemon(pokemonData)
+          }
+        )
       }, [pokemonName])
 
       if (!pokemonName) {
-        return 'Submit a pokemon'
+        return "Please enter a name";
       }
-
+      
       if (!pokemon) {
         return '...'
       }
+
+      //  return <div>Need to request info for: {pokemonName} </div>
 
       return <pre>{JSON.stringify(pokemon, null, 2)}</pre>
     }
@@ -58,6 +62,7 @@
       )
     }
 
+    //We need to fetch these information from a server
     function fetchPokemon(name) {
       const pokemonQuery = `
         query PokemonInfo($name: String) {
@@ -85,7 +90,7 @@
           },
           body: JSON.stringify({
             query: pokemonQuery,
-            variables: {name},
+            variables: { name },
           }),
         })
         .then(r => r.json())
